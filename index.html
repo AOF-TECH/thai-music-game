@@ -42,6 +42,17 @@
       font-size: 2.2rem;
       z-index: 50;
     }
+
+    /* สไตล์สำหรับรูปเครื่องดนตรีจริง */
+    .inst-img {
+      object-fit: contain;
+      filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.15));
+      transition: transform 0.2s ease;
+    }
+    
+    .instrument-card:hover .inst-img {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 
@@ -51,14 +62,14 @@
   <header class="flex justify-between items-center bg-white/80 backdrop-blur-md p-3 md:p-4 rounded-3xl border-4 border-amber-300 shadow-lg">
     <div class="flex items-center gap-3">
       <div class="bg-amber-400 text-3xl p-2.5 rounded-2xl shadow-inner animate-bounce">
-        🎶
+        🎵
       </div>
       <div>
         <h1 class="text-xl md:text-3xl font-bold text-amber-600 drop-shadow-sm">
           ✨ สัมผัสเสียง บทเพลงไทย ✨
         </h1>
         <p class="text-xs md:text-base text-slate-600 font-semibold">
-          วางมือค้างไว้ ยิ่งค้างนาน เพลงยิ่งบรรเลงยาวสนุกสนาน! 🎉
+          วางมือค้างไว้ที่รูปเครื่องดนตรี เพื่อฟังบทเพลงบรรเลงยาว! 🎉
         </p>
       </div>
     </div>
@@ -75,49 +86,69 @@
 
     <!-- Visual Banner Guides -->
     <div class="absolute top-3 bg-amber-400/90 text-slate-900 px-6 py-2 rounded-full border-2 border-white text-xs md:text-base font-bold shadow-lg backdrop-blur-sm flex items-center gap-2 animate-pulse">
-      <span>👇 วางมือค้างไว้เพื่อฟังบทเพลงยาวบรรเลงต่อเนื่อง 🎼</span>
+      <span>👇 วางมือค้างไว้ที่เครื่องดนตรีด้านล่าง 🎼</span>
     </div>
 
     <!-- Floating Notes Effect Layer -->
     <div id="particle-layer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
   </main>
 
-  <!-- Instrument Cards -->
+  <!-- Instrument Cards ( Real Image Version ) -->
   <footer class="grid grid-cols-5 gap-2 md:gap-4 h-36 md:h-44">
     
     <!-- 1. ระนาดเอก -->
-    <div id="inst-ranat" class="instrument-card bg-amber-100 border-4 border-amber-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
-      <div class="text-3xl md:text-5xl mb-1">🪘</div>
-      <div class="font-bold text-amber-800 text-xs md:text-lg">ระนาดเอก</div>
-      <div class="text-[10px] md:text-xs text-amber-600 font-semibold mt-0.5 bg-amber-200 px-2 py-0.5 rounded-full">เพลงระนาดรัว 🎶</div>
+    <div id="inst-ranat" class="instrument-card bg-amber-100 border-4 border-amber-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-between text-center shadow-md relative overflow-hidden">
+      <div class="w-full h-16 md:h-24 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ranat_ek.png/640px-Ranat_ek.png" alt="ระนาดเอก" class="inst-img max-h-full">
+      </div>
+      <div>
+        <div class="font-bold text-amber-800 text-xs md:text-lg">ระนาดเอก</div>
+        <div class="text-[10px] md:text-xs text-amber-600 font-semibold bg-amber-200 px-2 py-0.5 rounded-full">เพลงระนาดรัว 🎶</div>
+      </div>
     </div>
 
     <!-- 2. ฆ้องวงใหญ่ -->
-    <div id="inst-khong" class="instrument-card bg-rose-100 border-4 border-rose-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
-      <div class="text-3xl md:text-5xl mb-1">⭕</div>
-      <div class="font-bold text-rose-800 text-xs md:text-lg">ฆ้องวง</div>
-      <div class="text-[10px] md:text-xs text-rose-600 font-semibold mt-0.5 bg-rose-200 px-2 py-0.5 rounded-full">ทำนองไทยเดิม 🔔</div>
+    <div id="inst-khong" class="instrument-card bg-rose-100 border-4 border-rose-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-between text-center shadow-md relative overflow-hidden">
+      <div class="w-full h-16 md:h-24 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Khong_wong_yai.png/640px-Khong_wong_yai.png" alt="ฆ้องวงใหญ่" class="inst-img max-h-full">
+      </div>
+      <div>
+        <div class="font-bold text-rose-800 text-xs md:text-lg">ฆ้องวง</div>
+        <div class="text-[10px] md:text-xs text-rose-600 font-semibold bg-rose-200 px-2 py-0.5 rounded-full">ทำนองไทยเดิม 🔔</div>
+      </div>
     </div>
 
     <!-- 3. ตะโพน -->
-    <div id="inst-taphon" class="instrument-card bg-emerald-100 border-4 border-emerald-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
-      <div class="text-3xl md:text-5xl mb-1">🥁</div>
-      <div class="font-bold text-emerald-800 text-xs md:text-lg">ตะโพน</div>
-      <div class="text-[10px] md:text-xs text-emerald-600 font-semibold mt-0.5 bg-emerald-200 px-2 py-0.5 rounded-full">หน้าทับกลอง 💥</div>
+    <div id="inst-taphon" class="instrument-card bg-emerald-100 border-4 border-emerald-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-between text-center shadow-md relative overflow-hidden">
+      <div class="w-full h-16 md:h-24 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Taphon.png/640px-Taphon.png" alt="ตะโพน" class="inst-img max-h-full">
+      </div>
+      <div>
+        <div class="font-bold text-emerald-800 text-xs md:text-lg">ตะโพน</div>
+        <div class="text-[10px] md:text-xs text-emerald-600 font-semibold bg-emerald-200 px-2 py-0.5 rounded-full">หน้าทับกลอง 💥</div>
+      </div>
     </div>
 
     <!-- 4. ฉิ่ง -->
-    <div id="inst-ching" class="instrument-card bg-sky-100 border-4 border-sky-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
-      <div class="text-3xl md:text-5xl mb-1">🔔</div>
-      <div class="font-bold text-sky-800 text-xs md:text-lg">ฉิ่ง</div>
-      <div class="text-[10px] md:text-xs text-sky-600 font-semibold mt-0.5 bg-sky-200 px-2 py-0.5 rounded-full">คุมจังหวะ 🎵</div>
+    <div id="inst-ching" class="instrument-card bg-sky-100 border-4 border-sky-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-between text-center shadow-md relative overflow-hidden">
+      <div class="w-full h-16 md:h-24 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ching_instrument.png/640px-Ching_instrument.png" alt="ฉิ่ง" class="inst-img max-h-full">
+      </div>
+      <div>
+        <div class="font-bold text-sky-800 text-xs md:text-lg">ฉิ่ง</div>
+        <div class="text-[10px] md:text-xs text-sky-600 font-semibold bg-sky-200 px-2 py-0.5 rounded-full">คุมจังหวะ 🎵</div>
+      </div>
     </div>
 
     <!-- 5. ซออู้ -->
-    <div id="inst-saw" class="instrument-card bg-purple-100 border-4 border-purple-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
-      <div class="text-3xl md:text-5xl mb-1">🎻</div>
-      <div class="font-bold text-purple-800 text-xs md:text-lg">ซออู้</div>
-      <div class="text-[10px] md:text-xs text-purple-600 font-semibold mt-0.5 bg-purple-200 px-2 py-0.5 rounded-full">ลาวดวงเดือน 🎶</div>
+    <div id="inst-saw" class="instrument-card bg-purple-100 border-4 border-purple-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-between text-center shadow-md relative overflow-hidden">
+      <div class="w-full h-16 md:h-24 flex items-center justify-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Saw_u.png/640px-Saw_u.png" alt="ซออู้" class="inst-img max-h-full">
+      </div>
+      <div>
+        <div class="font-bold text-purple-800 text-xs md:text-lg">ซออู้</div>
+        <div class="text-[10px] md:text-xs text-purple-600 font-semibold bg-purple-200 px-2 py-0.5 rounded-full">ลาวดวงเดือน 🎶</div>
+      </div>
     </div>
 
   </footer>
@@ -136,17 +167,15 @@
 
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    // ความถี่ตัวโน้ตดนตรีไทย (Scale: C5, D5, E5, G5, A5, C6, D6...)
     const N = {
       C4: 261.63, D4: 293.66, E4: 329.63, G4: 392.00, A4: 440.00,
       C5: 523.25, D5: 587.33, E5: 659.25, G5: 783.99, A5: 880.00,
       C6: 1046.50, D6: 1174.66, E6: 1318.51
     };
 
-    // ชุดทำนองเพลงยาวความยาว 16-32 โน้ตสำหรับแต่ละเครื่องดนตรี
     const instruments = [
       { 
-        id: "inst-ranat",  name: "ระนาดเอก", xMin: 0.00, xMax: 0.20, emoji: "🪘", speed: 150,
+        id: "inst-ranat",  name: "ระนาดเอก", xMin: 0.00, xMax: 0.20, emoji: "🎶", speed: 150,
         melody: [N.C5, N.D5, N.E5, N.G5, N.A5, N.G5, N.E5, N.D5, N.C5, N.E5, N.G5, N.A5, N.C6, N.A5, N.G5, N.E5, N.D5, N.C5, N.D5, N.E5, N.G5, N.E5, N.D5, N.C5]
       },
       { 
@@ -154,15 +183,15 @@
         melody: [N.G4, N.A4, N.C5, N.D5, N.E5, N.G5, N.E5, N.D5, N.C5, N.A4, N.G4, N.A4, N.C5, N.D5, N.C5, N.A4]
       },
       { 
-        id: "inst-taphon", name: "ตะโพน",   xMin: 0.40, xMax: 0.60, emoji: "🥁", speed: 220,
-        melody: [160, 120, 180, 100, 160, 0, 140, 110, 180, 100] // 0 หมายถึงเว้นจังหวะ
+        id: "inst-taphon", name: "ตะโพน",   xMin: 0.40, xMax: 0.60, emoji: "💥", speed: 220,
+        melody: [160, 120, 180, 100, 160, 0, 140, 110, 180, 100]
       },
       { 
         id: "inst-ching",  name: "ฉิ่ง",     xMin: 0.60, xMax: 0.80, emoji: "✨", speed: 450,
-        melody: [1, 0, 2, 0, 1, 0, 2, 0] // 1 = ฉิ่ง, 2 = ฉับ, 0 = เว้น
+        melody: [1, 0, 2, 0, 1, 0, 2, 0]
       },
       { 
-        id: "inst-saw",    name: "ซออู้",    xMin: 0.80, xMax: 1.00, emoji: "🎶", speed: 320,
+        id: "inst-saw",    name: "ซออู้",    xMin: 0.80, xMax: 1.00, emoji: "🎵", speed: 320,
         melody: [N.E4, N.G4, N.A4, N.C5, N.D5, N.E5, N.D5, N.C5, N.A4, N.G4, N.E4, N.G4, N.A4, N.C5, N.A4, N.G4]
       }
     ];
@@ -216,7 +245,7 @@
     }
 
     function playTaphonSound(pitch) {
-      if (pitch === 0) return; // เว้นจังหวะ
+      if (pitch === 0) return;
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -236,7 +265,7 @@
     }
 
     function playChingSound(type) {
-      if (type === 0) return; // เว้นจังหวะ
+      if (type === 0) return;
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
@@ -286,7 +315,6 @@
       lfo.stop(now + 0.5);
     }
 
-    // ฟังก์ชันรันโน้ตเพลงถัดไปตามคิว
     function stepMelody(inst) {
       if (audioCtx.state === 'suspended') audioCtx.resume();
 
@@ -376,7 +404,6 @@
                 if (!activeHoldIntervals[matchedInst.id]) {
                   stepMelody(matchedInst);
                   
-                  // เล่นบทเพลงยาวรันต่อเนื่อง
                   activeHoldIntervals[matchedInst.id] = setInterval(() => {
                     stepMelody(matchedInst);
                   }, matchedInst.speed);
@@ -386,7 +413,6 @@
           });
         }
 
-        // ล้าง Loop เมื่อยกมือออก
         instruments.forEach(inst => {
           if (!newlyDetectedInZone.has(inst.id) && activeHoldIntervals[inst.id]) {
             clearInterval(activeHoldIntervals[inst.id]);
