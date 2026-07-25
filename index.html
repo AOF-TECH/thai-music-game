@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สัมผัสเสียง ดนตรีไทย (Interactive Hand Motion)</title>
+  <!-- Tailwind CSS สำหรับจัด UI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- MediaPipe Hand Landmarker Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0"></script>
+  <style>
+    .instrument-card {
+      transition: all 0.15s ease-out;
+    }
+    .instrument-card.active {
+      transform: scale(1.08);
+      border-color: #f59e0b;
+      box-shadow: 0 0 25px rgba(245, 158, 11, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-white font-sans min-h-screen flex flex-col justify-between p-4 overflow-hidden select-none">
+
+  <!-- Header -->
+  <header class="flex justify-between items-center bg-slate-800/80 p-4 rounded-xl border border-slate-700">
+    <div>
+      <h1 class="text-xl md:text-2xl font-bold text-amber-400 flex items-center gap-2">
+        🎵 สัมผัสเสียง ดนตรีไทย
+      </h1>
+      <p class="text-xs md:text-sm text-slate-300">ยื่นมือแล้วขยับตีลงบริเวณเครื่องดนตรีด้านล่าง</p>
+    </div>
+    <div id="status" class="text-xs md:text-sm bg-amber-500/20 text-amber-300 px-3 py-1.5 rounded-full border border-amber-500/30">
+      ⏳ กำลังโหลดระบบกล้อง...
+    </div>
+  </header>
+
+  <!-- Video Feed & Overlay Area -->
+  <main class="relative flex-1 my-4 bg-black/50 rounded-2xl border-2 border-slate-700/50 overflow-hidden flex items-center justify-center">
+    <video id="webcam" class="absolute inset-0 w-full h-full object-cover -scale-x-100" autoplay playsinline></video>
+    <canvas id="output_canvas" class="absolute inset-0 w-full h-full object-cover -scale-x-100 pointer-events-none"></canvas>
+    
+    <!-- Guide Banner -->
+    <div class="absolute top-4 bg-slate-900/90 text-amber-300 px-6 py-2 rounded-full border border-amber-400/40 text-sm font-semibold shadow-lg backdrop-blur-md">
+      👇 ยื่นมือลงมาทำท่าตีตรงโซนเครื่องดนตรี 👇
+    </div>
+  </main>
+
+  <!-- Instrument Interactive Zone -->
+  <footer class="grid grid-cols-2 md:grid-cols-5 gap-3 h-32 md:h-36">
+    
+    <!-- ระนาดเอก -->
+    <div id="inst-ranat" class="instrument-card bg-slate-800/90 border-2 border-amber-500/30 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-sm">
+      <div class="text-3xl mb-1">🪘</div>
+      <div class="font-bold text-amber-300 text-sm md:text-base">ระนาดเอก</div>
+      <div class="text-[10px] md:text-xs text-slate-400 mt-0.5">ขยับมือลง ⬇️</div>
+    </div>
+
+    <!-- ฆ้องวงใหญ่ -->
+    <div id="inst-khong" class="instrument-card bg-slate-800/90 border-2 border-amber-500/30 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-sm">
+      <div class="text-3xl mb-1">⭕</div>
+      <div class="font-bold text-amber-300 text-sm md:text-base">ฆ้องวงใหญ่</div>
+      <div class="text-[10px] md:text-xs text-slate-400 mt-0.5">ขยับมือลง ⬇️</div>
+    </div>
+
+    <!-- ตะโพน -->
+    <div id="inst-taphon" class="instrument-card bg-slate-800/90 border-2 border-amber-500/30 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-sm">
+      <div class="text-3xl mb-1">🥁</div>
+      <div class="font-bold text-amber-300 text-sm md:text-base">ตะโพน</div>
+      <div class="text-[10px] md:text-xs text-slate-400 mt-0.5">ขยับมือลง ⬇️</div>
+    </div>
+
+    <!-- ฉิ่ง -->
+    <div id="inst-ching" class="instrument-card bg-slate-800/90 border-2 border-amber-500/30 rounded-xl p-3 flex flex-col items-center justify-center text-center backdrop-blur-sm">
+      <div class="text-3xl mb-1">🔔</div>
+      <div class="font-bold text-amber-300 text-sm md:text-base">ฉิ่ง</div>
+      <div class="text-[10px] md:text-xs text-slate-400 mt-0.5">ขยับมือลง ⬇️</div>
+    </div>
+
+    <!-- ซออู้ -->
+    <div id="inst-saw" class="instrument-card bg-slate-800/90 border-2 border-amber-500/30 rounded-xl p-3 flex flex-col items-center justify-center text-center col-span-2 md:col-span-1 backdrop-blur-sm">
+      <div class="text-3xl mb-1">🎻</div>
+      <div class="font-bold text-amber-300 text-sm md:text-base">ซออู้</div>
+      <div class="text-[10px] md:text-xs text-slate-400 mt-0.5">ขยับมือลง ⬇️</div>
+    </div>
+
+  </footer>
+
+  <!-- Script การทำงานของระบบ Hand Tracking & Web Audio API -->
+  <script type="module">
+    import { HandLandmarker, FilesetResolver, DrawingUtils } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
+
+    const video = document.getElementById("webcam");
+    const canvasElement = document.getElementById("output_canvas");
+    const canvasCtx = canvasElement.getContext("2d");
+    const statusDiv = document.getElementById("status");
+
+    let handLandmarker = undefined;
+    let lastVideoTime = -1;
+    
+    // โครงสร้างขอบเขตเครื่องดนตรี 5 ชิ้น (เรียงตาม Grid 5 ช่องด้านล่าง)
+    const instruments = [
+      { id: "inst-ranat",  name: "ระนาดเอก", freq: 523.25, xMin: 0.00, xMax: 0.20 }, // C5
+      { id: "inst-khong",  name: "ฆ้องวง",   freq: 587.33, xMin: 0.20, xMax: 0.40 }, // D5
+      { id: "inst-taphon", name: "ตะโพน",   freq: 329.63, xMin: 0.40, xMax: 0.60 }, // E4 (ต่ำหน่อยเป็นเครื่องหนัง)
+      { id: "inst-ching",  name: "ฉิ่ง",     freq: 880.00, xMin: 0.60, xMax: 0.80 }, // A5
+      { id: "inst-saw",    name: "ซออู้",    freq: 659.25, xMin: 0.80, xMax: 1.00 }  // E5
+    ];
+
+    // Web Audio API สำหรับจำลองเสียงดนตรีสังเคราะห์
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playSound(freq) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      
+      gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+      
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.5);
+    }
+
+    // สร้าง HandLandmarker
+    async function createHandLandmarker() {
+      const vision = await FilesetResolver.forVisionTasks(
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
+      );
+      handLandmarker = await HandLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: `https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task`,
+          delegate: "GPU"
+        },
+        runningMode: "VIDEO",
+        numHands: 2
+      });
+      statusDiv.innerText = "✅ ระบบพร้อมทำงาน";
+      statusDiv.className = "text-xs md:text-sm bg-emerald-500/20 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/30";
+      startCamera();
+    }
+
+    // เปิดใช้งาน WebCam
+    function startCamera() {
+      navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 } }).then((stream) => {
+        video.srcObject = stream;
+        video.addEventListener("loadeddata", predictWebcam);
+      });
+    }
+
+    // สถานะจับความเร็วและ Cooldown ของมือแต่ละข้าง
+    let prevY = [null, null];
+    let cooldowns = [0, 0];
+
+    async function predictWebcam() {
+      canvasElement.width = video.videoWidth;
+      canvasElement.height = video.videoHeight;
+
+      if (lastVideoTime !== video.currentTime && handLandmarker) {
+        lastVideoTime = video.currentTime;
+        const results = handLandmarker.detectForVideo(video, performance.now());
+
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+        const drawingUtils = new DrawingUtils(canvasCtx);
+
+        if (results.landmarks) {
+          results.landmarks.forEach((landmarks, handIndex) => {
+            // วาดจุดเชื่อมต่อมือ
+            drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, { color: "#f59e0b", lineWidth: 3 });
+            drawingUtils.drawLandmarks(landmarks, { color: "#ffffff", lineWidth: 1, radius: 4 });
+
+            // ดึงตำแหน่งนิ้วชี้ (Index Finger Tip - Landmark #8)
+            const indexTip = landmarks[8];
+            const currentX = 1 - indexTip.x; // Flip Mirror X
+            const currentY = indexTip.y;
+
+            // ตรวจสอบเงื่อนไข: มือลงมาอยู่ในเขต Hitbox ด้านล่าง (Y > 0.65)
+            if (currentY > 0.65) {
+              const now = Date.now();
+              
+              // คำนวณ Downward Motion Velocity (ต้องขยับลงอย่างรวดเร็ว)
+              const deltaY = prevY[handIndex] !== null ? currentY - prevY[handIndex] : 0;
+
+              // เงื่อนไขการสั่นระฆัง/ตี: ความเร็วขยับลง > 0.025 และพ้น Cooldown 200ms
+              if (deltaY > 0.025 && (now - cooldowns[handIndex] > 200)) {
+                
+                // หาเครื่องดนตรีตามตำแหน่ง X
+                const matchedInst = instruments.find(inst => currentX >= inst.xMin && currentX < inst.xMax);
+                
+                if (matchedInst) {
+                  // เล่นเสียง
+                  playSound(matchedInst.freq);
+                  
+                  // แสดง UI Effect Highlight
+                  const cardEl = document.getElementById(matchedInst.id);
+                  cardEl.classList.add("active");
+                  setTimeout(() => cardEl.classList.remove("active"), 200);
+
+                  cooldowns[handIndex] = now;
+                }
+              }
+            }
+
+            prevY[handIndex] = currentY;
+          });
+        }
+        canvasCtx.restore();
+      }
+
+      requestAnimationFrame(predictWebcam);
+    }
+
+    // เริ่มต้นระบบ 
+    createHandLandmarker();
+  </script>
+</body>
+</html>
