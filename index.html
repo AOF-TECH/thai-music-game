@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>สัมผัสเสียง ดนตรีไทยสดใส - สำหรับเด็ก</title>
-  <!-- Tailwind CSS สำหรับจัดสไตล์ -->
+  <title>สัมผัสเสียง ดนตรีไทยสดใส - บทเพลงยาวสำหรับเด็ก</title>
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Font Cute & Friendly -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,14 +18,13 @@
       font-family: 'Mali', cursive, sans-serif;
     }
 
-    /* Animation สำหรับความสดใส */
     @keyframes floatNote {
       0% { transform: translateY(0px) scale(0.8) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-70px) scale(1.3) rotate(20deg); opacity: 0; }
+      100% { transform: translateY(-80px) scale(1.4) rotate(25deg); opacity: 0; }
     }
 
     .animate-float-note {
-      animation: floatNote 0.8s ease-out forwards;
+      animation: floatNote 0.9s ease-out forwards;
     }
 
     .instrument-card {
@@ -33,15 +32,14 @@
     }
 
     .instrument-card.active {
-      transform: translateY(-10px) scale(1.06);
-      box-shadow: 0 15px 30px rgba(255, 180, 0, 0.4);
+      transform: translateY(-12px) scale(1.08);
+      box-shadow: 0 18px 35px rgba(255, 180, 0, 0.45);
     }
 
-    /* Custom Scroll & Particle Container */
     .note-particle {
       position: absolute;
       pointer-events: none;
-      font-size: 2rem;
+      font-size: 2.2rem;
       z-index: 50;
     }
   </style>
@@ -49,18 +47,18 @@
 
 <body class="bg-gradient-to-b from-sky-200 via-indigo-100 to-amber-100 text-slate-800 min-h-screen flex flex-col justify-between p-3 md:p-5 select-none overflow-hidden">
 
-  <!-- Header น่ารักสดใส -->
+  <!-- Header -->
   <header class="flex justify-between items-center bg-white/80 backdrop-blur-md p-3 md:p-4 rounded-3xl border-4 border-amber-300 shadow-lg">
     <div class="flex items-center gap-3">
       <div class="bg-amber-400 text-3xl p-2.5 rounded-2xl shadow-inner animate-bounce">
-        🪘
+        🎶
       </div>
       <div>
         <h1 class="text-xl md:text-3xl font-bold text-amber-600 drop-shadow-sm">
-          ✨ สัมผัสเสียง ดนตรีไทย ✨
+          ✨ สัมผัสเสียง บทเพลงไทย ✨
         </h1>
         <p class="text-xs md:text-base text-slate-600 font-semibold">
-          ยื่นมือลงด้านล่าง แล้วเอามือค้างไว้ฟังเพลงสนุกๆ ได้เลย! 🎉
+          วางมือค้างไว้ ยิ่งค้างนาน เพลงยิ่งบรรเลงยาวสนุกสนาน! 🎉
         </p>
       </div>
     </div>
@@ -77,49 +75,49 @@
 
     <!-- Visual Banner Guides -->
     <div class="absolute top-3 bg-amber-400/90 text-slate-900 px-6 py-2 rounded-full border-2 border-white text-xs md:text-base font-bold shadow-lg backdrop-blur-sm flex items-center gap-2 animate-pulse">
-      <span>👇 วางมือค้างไว้ที่เครื่องดนตรีด้านล่างเพื่อเล่นเพลง 🎶</span>
+      <span>👇 วางมือค้างไว้เพื่อฟังบทเพลงยาวบรรเลงต่อเนื่อง 🎼</span>
     </div>
 
     <!-- Floating Notes Effect Layer -->
     <div id="particle-layer" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
   </main>
 
-  <!-- Instrument Cards (Kid-Friendly Palette) -->
+  <!-- Instrument Cards -->
   <footer class="grid grid-cols-5 gap-2 md:gap-4 h-36 md:h-44">
     
     <!-- 1. ระนาดเอก -->
     <div id="inst-ranat" class="instrument-card bg-amber-100 border-4 border-amber-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
       <div class="text-3xl md:text-5xl mb-1">🪘</div>
       <div class="font-bold text-amber-800 text-xs md:text-lg">ระนาดเอก</div>
-      <div class="text-[10px] md:text-xs text-amber-600 font-semibold mt-0.5 bg-amber-200 px-2 py-0.5 rounded-full">ตีรัวๆ 🎶</div>
+      <div class="text-[10px] md:text-xs text-amber-600 font-semibold mt-0.5 bg-amber-200 px-2 py-0.5 rounded-full">เพลงระนาดรัว 🎶</div>
     </div>
 
     <!-- 2. ฆ้องวงใหญ่ -->
     <div id="inst-khong" class="instrument-card bg-rose-100 border-4 border-rose-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
       <div class="text-3xl md:text-5xl mb-1">⭕</div>
       <div class="font-bold text-rose-800 text-xs md:text-lg">ฆ้องวง</div>
-      <div class="text-[10px] md:text-xs text-rose-600 font-semibold mt-0.5 bg-rose-200 px-2 py-0.5 rounded-full">ทำนองใส 🔔</div>
+      <div class="text-[10px] md:text-xs text-rose-600 font-semibold mt-0.5 bg-rose-200 px-2 py-0.5 rounded-full">ทำนองไทยเดิม 🔔</div>
     </div>
 
     <!-- 3. ตะโพน -->
     <div id="inst-taphon" class="instrument-card bg-emerald-100 border-4 border-emerald-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
       <div class="text-3xl md:text-5xl mb-1">🥁</div>
       <div class="font-bold text-emerald-800 text-xs md:text-lg">ตะโพน</div>
-      <div class="text-[10px] md:text-xs text-emerald-600 font-semibold mt-0.5 bg-emerald-200 px-2 py-0.5 rounded-full">จังหวะมันส์ 💥</div>
+      <div class="text-[10px] md:text-xs text-emerald-600 font-semibold mt-0.5 bg-emerald-200 px-2 py-0.5 rounded-full">หน้าทับกลอง 💥</div>
     </div>
 
     <!-- 4. ฉิ่ง -->
     <div id="inst-ching" class="instrument-card bg-sky-100 border-4 border-sky-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
       <div class="text-3xl md:text-5xl mb-1">🔔</div>
       <div class="font-bold text-sky-800 text-xs md:text-lg">ฉิ่ง</div>
-      <div class="text-[10px] md:text-xs text-sky-600 font-semibold mt-0.5 bg-sky-200 px-2 py-0.5 rounded-full">ฉิ่ง-ฉับ 🎵</div>
+      <div class="text-[10px] md:text-xs text-sky-600 font-semibold mt-0.5 bg-sky-200 px-2 py-0.5 rounded-full">คุมจังหวะ 🎵</div>
     </div>
 
     <!-- 5. ซออู้ -->
     <div id="inst-saw" class="instrument-card bg-purple-100 border-4 border-purple-400 rounded-3xl p-2 md:p-3 flex flex-col items-center justify-center text-center shadow-md relative overflow-hidden">
       <div class="text-3xl md:text-5xl mb-1">🎻</div>
       <div class="font-bold text-purple-800 text-xs md:text-lg">ซออู้</div>
-      <div class="text-[10px] md:text-xs text-purple-600 font-semibold mt-0.5 bg-purple-200 px-2 py-0.5 rounded-full">เพลงหวาน 🎶</div>
+      <div class="text-[10px] md:text-xs text-purple-600 font-semibold mt-0.5 bg-purple-200 px-2 py-0.5 rounded-full">ลาวดวงเดือน 🎶</div>
     </div>
 
   </footer>
@@ -136,25 +134,44 @@
     let handLandmarker;
     let lastVideoTime = -1;
 
-    // Web Audio API สำหรับสังเคราะห์เสียงดนตรีไทยสมจริง
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-    // ข้อมูลเครื่องดนตรีและโหมดการเล่นต่อเนื่องเมื่อเอามือค้าง
+    // ความถี่ตัวโน้ตดนตรีไทย (Scale: C5, D5, E5, G5, A5, C6, D6...)
+    const N = {
+      C4: 261.63, D4: 293.66, E4: 329.63, G4: 392.00, A4: 440.00,
+      C5: 523.25, D5: 587.33, E5: 659.25, G5: 783.99, A5: 880.00,
+      C6: 1046.50, D6: 1174.66, E6: 1318.51
+    };
+
+    // ชุดทำนองเพลงยาวความยาว 16-32 โน้ตสำหรับแต่ละเครื่องดนตรี
     const instruments = [
-      { id: "inst-ranat",  name: "ระนาดเอก", xMin: 0.00, xMax: 0.20, emoji: "🪘", notes: [523.25, 587.33, 659.25, 698.46, 783.99] },
-      { id: "inst-khong",  name: "ฆ้องวง",   xMin: 0.20, xMax: 0.40, emoji: "🔔", notes: [587.33, 659.25, 783.99, 880.00, 987.77] },
-      { id: "inst-taphon", name: "ตะโพน",   xMin: 0.40, xMax: 0.60, emoji: "🥁", notes: [150, 120, 180, 100] },
-      { id: "inst-ching",  name: "ฉิ่ง",     xMin: 0.60, xMax: 0.80, emoji: "✨", notes: [880.00, 440.00] },
-      { id: "inst-saw",    name: "ซออู้",    xMin: 0.80, xMax: 1.00, emoji: "🎶", notes: [329.63, 392.00, 440.00, 523.25, 587.33] }
+      { 
+        id: "inst-ranat",  name: "ระนาดเอก", xMin: 0.00, xMax: 0.20, emoji: "🪘", speed: 150,
+        melody: [N.C5, N.D5, N.E5, N.G5, N.A5, N.G5, N.E5, N.D5, N.C5, N.E5, N.G5, N.A5, N.C6, N.A5, N.G5, N.E5, N.D5, N.C5, N.D5, N.E5, N.G5, N.E5, N.D5, N.C5]
+      },
+      { 
+        id: "inst-khong",  name: "ฆ้องวง",   xMin: 0.20, xMax: 0.40, emoji: "🔔", speed: 280,
+        melody: [N.G4, N.A4, N.C5, N.D5, N.E5, N.G5, N.E5, N.D5, N.C5, N.A4, N.G4, N.A4, N.C5, N.D5, N.C5, N.A4]
+      },
+      { 
+        id: "inst-taphon", name: "ตะโพน",   xMin: 0.40, xMax: 0.60, emoji: "🥁", speed: 220,
+        melody: [160, 120, 180, 100, 160, 0, 140, 110, 180, 100] // 0 หมายถึงเว้นจังหวะ
+      },
+      { 
+        id: "inst-ching",  name: "ฉิ่ง",     xMin: 0.60, xMax: 0.80, emoji: "✨", speed: 450,
+        melody: [1, 0, 2, 0, 1, 0, 2, 0] // 1 = ฉิ่ง, 2 = ฉับ, 0 = เว้น
+      },
+      { 
+        id: "inst-saw",    name: "ซออู้",    xMin: 0.80, xMax: 1.00, emoji: "🎶", speed: 320,
+        melody: [N.E4, N.G4, N.A4, N.C5, N.D5, N.E5, N.D5, N.C5, N.A4, N.G4, N.E4, N.G4, N.A4, N.C5, N.A4, N.G4]
+      }
     ];
 
-    // ตัวแปรสำหรับคุมระบบเล่นต่อเนื่อง
     let activeHoldIntervals = {};
     let noteIndexes = { "inst-ranat": 0, "inst-khong": 0, "inst-taphon": 0, "inst-ching": 0, "inst-saw": 0 };
 
-    // --- ระบบสังเคราะห์เสียงสมจริง (Realistic Thai Instruments Sound Generator) --- //
+    // --- Audio Generators --- //
 
-    // 1. เสียงระนาดเอก (Woody percussion + Rich Harmonics)
     function playRanatSound(freq) {
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
@@ -163,8 +180,6 @@
 
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, now);
-
-      // Harmonics เพิ่มความเป็นเสียงไม้ระนาด
       osc2.type = 'sine';
       osc2.frequency.setValueAtTime(freq * 3.01, now);
 
@@ -175,13 +190,10 @@
       osc2.connect(gain);
       gain.connect(audioCtx.destination);
 
-      osc.start(now);
-      osc2.start(now);
-      osc.stop(now + 0.35);
-      osc2.stop(now + 0.35);
+      osc.start(now); osc2.start(now);
+      osc.stop(now + 0.35); osc2.stop(now + 0.35);
     }
 
-    // 2. เสียงฆ้องวง (Metallic Bell Resonance)
     function playKhongSound(freq) {
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
@@ -190,74 +202,69 @@
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now);
-
       overtone.type = 'sine';
-      overtone.frequency.setValueAtTime(freq * 2.76, now); // Metallic overtone
+      overtone.frequency.setValueAtTime(freq * 2.76, now);
 
       gain.gain.setValueAtTime(0.5, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
 
-      osc.connect(gain);
-      overtone.connect(gain);
+      osc.connect(gain); overtone.connect(gain);
       gain.connect(audioCtx.destination);
 
-      osc.start(now);
-      overtone.start(now);
-      osc.stop(now + 0.8);
-      overtone.stop(now + 0.8);
+      osc.start(now); overtone.start(now);
+      osc.stop(now + 0.85); overtone.stop(now + 0.85);
     }
 
-    // 3. เสียงกลองตะโพน (Membranophone Drum Synthetic)
     function playTaphonSound(pitch) {
+      if (pitch === 0) return; // เว้นจังหวะ
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
       osc.type = 'sine';
       osc.frequency.setValueAtTime(pitch, now);
-      osc.frequency.exponentialRampToValueAtTime(40, now + 0.2); // Pitch drop for drum head
+      osc.frequency.exponentialRampToValueAtTime(35, now + 0.22);
 
       gain.gain.setValueAtTime(0.8, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.3);
+      osc.stop(now + 0.28);
     }
 
-    // 4. เสียงฉิ่ง (Ching Open / Chhab Muted)
-    function playChingSound(isChing) {
+    function playChingSound(type) {
+      if (type === 0) return; // เว้นจังหวะ
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
+      const isChing = (type === 1);
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(isChing ? 880 : 400, now);
+      osc.frequency.setValueAtTime(isChing ? 880 : 420, now);
 
-      gain.gain.setValueAtTime(0.4, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + (isChing ? 0.9 : 0.12));
+      gain.gain.setValueAtTime(0.45, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + (isChing ? 0.95 : 0.12));
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + (isChing ? 0.9 : 0.12));
+      osc.stop(now + (isChing ? 0.95 : 0.12));
     }
 
-    // 5. เสียงซออู้ (Bowed String with Vibrato & Filter)
     function playSawSound(freq) {
       const now = audioCtx.currentTime;
       const osc = audioCtx.createOscillator();
       const filter = audioCtx.createBiquadFilter();
       const gain = audioCtx.createGain();
 
-      // Vibrato LFO (ลูกคอซอ)
       const lfo = audioCtx.createOscillator();
       const lfoGain = audioCtx.createGain();
       lfo.frequency.setValueAtTime(5.5, now);
-      lfoGain.gain.setValueAtTime(6, now);
+      lfoGain.gain.setValueAtTime(5, now);
       lfo.connect(osc.frequency);
       lfo.start(now);
 
@@ -265,60 +272,41 @@
       osc.frequency.setValueAtTime(freq, now);
 
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(750, now); // ให้เสียงนุ่มแบบซออู้
+      filter.frequency.setValueAtTime(700, now);
 
       gain.gain.setValueAtTime(0.35, now);
-      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
 
       osc.connect(filter);
       filter.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start(now);
-      osc.stop(now + 0.45);
-      lfo.stop(now + 0.45);
+      osc.stop(now + 0.5);
+      lfo.stop(now + 0.5);
     }
 
-    // ฟังก์ชันยิงโน้ตเสียงเฉพาะเครื่อง
-    function triggerInstrumentSound(inst) {
+    // ฟังก์ชันรันโน้ตเพลงถัดไปตามคิว
+    function stepMelody(inst) {
       if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const idx = noteIndexes[inst.id] % inst.melody.length;
+      const noteVal = inst.melody[idx];
+      noteIndexes[inst.id]++;
 
       const card = document.getElementById(inst.id);
       card.classList.add("active");
-      setTimeout(() => card.classList.remove("active"), 200);
+      setTimeout(() => card.classList.remove("active"), 180);
 
-      // สร้างเอฟเฟกต์ตัวโน้ตลอย
       createFloatingParticle(card, inst.emoji);
 
-      if (inst.id === "inst-ranat") {
-        // ตีรัวระนาด
-        const freq = inst.notes[noteIndexes[inst.id] % inst.notes.length];
-        playRanatSound(freq);
-        noteIndexes[inst.id]++;
-      } else if (inst.id === "inst-khong") {
-        // ทำนองฆ้องวง
-        const freq = inst.notes[noteIndexes[inst.id] % inst.notes.length];
-        playKhongSound(freq);
-        noteIndexes[inst.id]++;
-      } else if (inst.id === "inst-taphon") {
-        // จังหวะตะโพน
-        const pitch = inst.notes[noteIndexes[inst.id] % inst.notes.length];
-        playTaphonSound(pitch);
-        noteIndexes[inst.id]++;
-      } else if (inst.id === "inst-ching") {
-        // สลับ ฉิ่ง / ฉับ
-        const isChing = (noteIndexes[inst.id] % 2 === 0);
-        playChingSound(isChing);
-        noteIndexes[inst.id]++;
-      } else if (inst.id === "inst-saw") {
-        // สีซอหวานๆ
-        const freq = inst.notes[noteIndexes[inst.id] % inst.notes.length];
-        playSawSound(freq);
-        noteIndexes[inst.id]++;
-      }
+      if (inst.id === "inst-ranat") playRanatSound(noteVal);
+      else if (inst.id === "inst-khong") playKhongSound(noteVal);
+      else if (inst.id === "inst-taphon") playTaphonSound(noteVal);
+      else if (inst.id === "inst-ching") playChingSound(noteVal);
+      else if (inst.id === "inst-saw") playSawSound(noteVal);
     }
 
-    // เอฟเฟกต์สร้างตัวโน้ตลอยสำหรับเด็ก
     function createFloatingParticle(targetEl, symbol) {
       const rect = targetEl.getBoundingClientRect();
       const p = document.createElement("div");
@@ -327,10 +315,10 @@
       p.style.left = `${rect.left + rect.width / 2 - 15}px`;
       p.style.top = `${rect.top}px`;
       particleLayer.appendChild(p);
-      setTimeout(() => p.remove(), 800);
+      setTimeout(() => p.remove(), 900);
     }
 
-    // --- ระบบติดตามมือ MediaPipe Hand Landmarker --- //
+    // --- Tracking Logic --- //
 
     async function initHandTracking() {
       const vision = await FilesetResolver.forVisionTasks(
@@ -345,7 +333,7 @@
         numHands: 2
       });
 
-      statusDiv.innerHTML = "<span>✅ ระบบพร้อมเล่นแล้ว!</span>";
+      statusDiv.innerHTML = "<span>✅ พร้อมบรรเลงบทเพลงแล้ว!</span>";
       statusDiv.className = "text-xs md:text-sm font-bold bg-emerald-100 text-emerald-700 px-4 py-2 rounded-2xl border-2 border-emerald-300 shadow-sm";
       startWebcam();
     }
@@ -356,8 +344,6 @@
         video.addEventListener("loadeddata", renderLoop);
       });
     }
-
-    let currentHeldInstruments = new Set();
 
     async function renderLoop() {
       canvasElement.width = video.videoWidth;
@@ -375,37 +361,32 @@
 
         if (results.landmarks) {
           results.landmarks.forEach((landmarks) => {
-            // วาดเส้นมือโทนสีสดใส
             drawingUtils.drawConnectors(landmarks, HandLandmarker.HAND_CONNECTIONS, { color: "#fbbf24", lineWidth: 4 });
             drawingUtils.drawLandmarks(landmarks, { color: "#f43f5e", lineWidth: 2, radius: 5 });
 
-            // ตรวจสอบตำแหน่งปลาย นิ้วชี้ (Landmark #8) และ นิ้วกลาง (Landmark #12)
             const indexFinger = landmarks[8];
-            const handX = 1 - indexFinger.x; // Mirror X
+            const handX = 1 - indexFinger.x;
             const handY = indexFinger.y;
 
-            // ตรวจสอบว่ามือยื่นลงมาบริเวณเครื่องดนตรีด้านล่าง (Y > 0.60)
             if (handY > 0.60) {
               const matchedInst = instruments.find(inst => handX >= inst.xMin && handX < inst.xMax);
               if (matchedInst) {
                 newlyDetectedInZone.add(matchedInst.id);
 
-                // หากเพิ่งยื่นมือเข้ามาใหม่ -> เริ่มเล่นเสียงและสั่งวนลูป Continuous Loop
                 if (!activeHoldIntervals[matchedInst.id]) {
-                  triggerInstrumentSound(matchedInst);
+                  stepMelody(matchedInst);
                   
-                  // ค้างมือไว้ = เล่นเพลงวนลูปต่อเนื่อง
-                  const intervalTime = matchedInst.id === "inst-ranat" ? 140 : 280;
+                  // เล่นบทเพลงยาวรันต่อเนื่อง
                   activeHoldIntervals[matchedInst.id] = setInterval(() => {
-                    triggerInstrumentSound(matchedInst);
-                  }, intervalTime);
+                    stepMelody(matchedInst);
+                  }, matchedInst.speed);
                 }
               }
             }
           });
         }
 
-        // ล้าง Loop เครื่องดนตรีที่เอามือออกไปแล้ว
+        // ล้าง Loop เมื่อยกมือออก
         instruments.forEach(inst => {
           if (!newlyDetectedInZone.has(inst.id) && activeHoldIntervals[inst.id]) {
             clearInterval(activeHoldIntervals[inst.id]);
@@ -419,7 +400,6 @@
       requestAnimationFrame(renderLoop);
     }
 
-    // เริ่มการทำงานระบบ
     initHandTracking();
   </script>
 </body>
